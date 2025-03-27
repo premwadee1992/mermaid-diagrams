@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mermaid Flowchart - Styled</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+    document.addEventListener("DOMContentLoaded", () => {
+      const mermaidCode = `
+        ---
+        config:
+          theme: forest
+          securityLevel: loose
+          flowchart:
+            curve: basis
+            nodeSpacing: 30
+            rankSpacing: 50
+            htmlLabels: true
+            useMaxWidth: false
+          themeVariables:
+            primaryColor: "#fdf6e3"
+            edgeLabelBackground: "#ffffff"
+            fontSize: "16px"
+            fontFamily: "Tahoma"
+        ---
+        graph TD;
+          A[Create Order<br>📝 Order Type: Special Request<br>📌 Order Subtype: Replenish] --> B[📦 Merge Warehouse]
+          B --> C{Loading Groups?}
+          C -->|Ambient| C1[🌡 Ambient]
+          C -->|Chilled| C2[❄ Chilled]
+          C -->|Lifestyle| C3[🏬 Lifestyle]
+          C1 --> D{Product Types?}
+          C2 --> D1{Product Types?}
+          C3 --> D2{Product Types?}
+          D -->|Inventory| E1[🏢 Inventory]
+          D -->|Fix Asset| E2[💾 Fix Asset]
+          D -->|Store Use| E3[🛍 Store Use]
+          D1 -->|Inventory| F1[🏢 Inventory]
+          D1 -->|Fix Asset| F2[💾 Fix Asset]
+          D1 -->|Store Use| F3[🛍 Store Use]
+          D2 -->|Inventory| G1[🏢 Inventory]
+          D2 -->|Fix Asset| G2[💾 Fix Asset]
+          D2 -->|Store Use| G3[🛍 Store Use]
+          E1 --> H1[🔗 Combine Orders]
+          E2 --> H2[🛠 Split Order]
+          E3 --> H3[🛠 Split Order]
+          F1 --> I1[🔗 Combine Orders]
+          F2 --> I2[🛠 Split Order]
+          F3 --> I3[🛠 Split Order]
+          G1 --> J1[🔗 Combine Orders]
+          G2 --> J2[🛠 Split Order]
+          G3 --> J3[🛠 Split Order]
+          H1 --> K1[🔍 Find Order]
+          H2 --> K2[🔍 Find Order]
+          H3 --> K3[🔍 Find Order]
+          I1 --> L1[🔍 Find Order]
+          I2 --> L2[🔍 Find Order]
+          I3 --> L3[🔍 Find Order]
+          J1 --> M1[🔍 Find Order]
+          J2 --> M2[🔍 Find Order]
+          J3 --> M3[🔍 Find Order]
+          K1 --> N1[🔎 Use Reference No.]
+          K2 --> N2[🔎 Use Request No.]
+          K3 --> N2
+          L1 --> O1[🔎 Use Reference No.]
+          L2 --> O2[🔎 Use Request No.]
+          L3 --> O2
+          M1 --> P1[🔎 Use Reference No.]
+          M2 --> P2[🔎 Use Request No.]
+          M3 --> P2
+          N1 --> Q1[🏬 OD25-StoreCode-0001]
+          N2 --> Q2[📂 Find Entries<br>OD25-StoreCode-0001/01, /02]
+          O1 --> R1[🏬 OD25-StoreCode-0001]
+          O2 --> R2[📂 Find Entries<br>OD25-StoreCode-0001/01, /02]
+          P1 --> S1[🏬 OD25-StoreCode-0001]
+          P2 --> S2[📂 Find Entries<br>OD25-StoreCode-0001/01, /02]
+      `;
+      document.getElementById("mermaid-diagram").innerHTML = `<div class="mermaid">${mermaidCode}</div>`;
+      mermaid.init(undefined, document.querySelectorAll(".mermaid"));
+    });
+  </script>
+</head>
+<body>
+  <h2>📌 Order Flowchart</h2>
+  <div id="mermaid-diagram"></div>
+</body>
+</html>
