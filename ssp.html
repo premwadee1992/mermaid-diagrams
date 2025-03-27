@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mermaid Flowchart</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: false });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const mermaidCode = `
+                graph TD;
+                    A[SSP Flow <br> 🛠 แค่ลองซ้อม] --> B[21:00 ⏰ <br> 📊 Calculate Min/Max for Order]
+                    B --> C[21:30 ⏳ <br> 🔄 - Combine Item From Special Request <br> ✅ - Approve Special Request <br> 📦 - Create Order split by order type]
+                    C --> D[22:00 🚀 <br> 🏪 Allocate Store Replenishment Stock]
+
+                    %% ปรับแต่งให้กล่องพอดีกับข้อความ
+                    style A fill:#f8f9fa,stroke:#000,stroke-width:1px,font-size:14px
+                    style B fill:#e3f2fd,stroke:#000,stroke-width:1px,font-size:14px
+                    style C fill:#e3f2fd,stroke:#000,stroke-width:1px,font-size:14px
+                    style D fill:#e3f2fd,stroke:#000,stroke-width:1px,font-size:14px
+            `;
+
+            const container = document.getElementById("mermaid-diagram");
+            container.innerHTML = `<div class="mermaid">${mermaidCode}</div>`;
+
+            // ใช้ setTimeout เพื่อให้ Mermaid.js โหลดครบก่อน Render
+            setTimeout(() => {
+                mermaid.init(undefined, document.querySelectorAll(".mermaid"));
+            }, 500);
+        });
+    </script>
+
+    <style>
+        /* ทำให้ Flowchart อยู่ตรงกลาง */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        #mermaid-diagram {
+            width: 80%;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>📌 Order Flowchart</h2>
+        <div id="mermaid-diagram"></div>
+    </div>
+</body>
+</html>
